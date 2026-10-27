@@ -40,7 +40,45 @@ try:
     # ===========================
     # 2. METODO POST
     # ============================
+    print("\n POST: Crear un producto")
+    
+    nuevo_producto = {
+        "title": "Teclado mecanico gamer",
+        "price": "89.000",
+        "descripction": "Teclado para juegos",
+        "category": "electronics"
+    }
 
+    respuesta = requests.post(
+        f"{BASE_URL}/add",
+        json = nuevo_producto,
+        timeout = 10
+    )
+    
+    respuesta.raise_for_status()
+    mostrar_respuesta(respuesta)
+    
+    # 3. PUT: REEMPLAZAR DATOS DEL PRODUCTO
+    
+    print("\n ---PUT: Reeplaza un prodcuto")
+    
+    producto_actualizado = {
+        "title": "Notebook para desarrollo",
+        "price": "599900",
+        "description": "Notebook para programar",
+        "category": "laptops"
+    }    
 
+    respuesta = requests.put(
+        f"{BASE_URL}/1",
+        json=producto_actualizado,
+        timeout=10
+    )
+
+    respuesta.raise_for_status()
+    mostrar_respuesta(respuesta)
+    
+    
+    
 except requests.exceptions.Timeout:
     print("Error: se agoto el tiempo de espera")
